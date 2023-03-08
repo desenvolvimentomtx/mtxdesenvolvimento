@@ -2983,6 +2983,11 @@
     <Content Include="Views\Tributacao\TributacaoNcmEditMassaModalComNCM.cshtml" />
     <Content Include="Views\Acoes\CamposComunsEmpresa.cshtml" />
     <Content Include="Views\Produto\EditVarios.cshtml" />
+    <Content Include="Views\TributacaoMtx\TributacaoComNCM.cshtml" />
+    <Content Include="Views\Acoes\CamposComunsTribNCM_MTX.cshtml" />
+    <Content Include="Views\TributacaoMtx\TributacaoNcmEditMassaNCMModal.cshtml" />
+    <Content Include="Views\TributacaoMtx\TributacaoNcmEditMassaModalComNCM.cshtml" />
+    <Content Include="Views\Acoes\botoesEmpUsu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2991,7 +2996,6 @@
     <Folder Include="Jsons\" />
     <Folder Include="Views\Criptografia\" />
     <Folder Include="Views\Teste\" />
-    <Folder Include="Views\TributacaoMtx\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -248,6 +248,13 @@ namespace MatrizTributaria.Models
         [Column("Simp_Nacional")]
         public Nullable<sbyte> simpNacional { get; set; }
 
+        [Column("CRT")]
+        public Nullable<int> crt { get; set; }
+
+        [Column("Regime_Trib")]
+        public Nullable<int> regime_trib { get; set; }
+
+
 
 
 

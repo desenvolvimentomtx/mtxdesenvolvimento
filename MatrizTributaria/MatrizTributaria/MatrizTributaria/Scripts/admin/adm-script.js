@@ -4080,7 +4080,9 @@ $(document).ready(function () {
     //com NCM
     var botaoSalvarNCMtribComNCM = document.getElementById("salvarNCMTribComNCM");
 
-
+    //NOVA ACTION MAR-2023
+    var botaoSalvarNCMtribComNCM_MTX = document.getElementById("salvarNCMTribComNCM_MTX");
+    
 
     //verificar se o botao existe
     if (botaoSalvarNCMTribNCM) {
@@ -4328,6 +4330,128 @@ $(document).ready(function () {
         });
     }
 
+    //NOVA ACTION
+    if (botaoSalvarNCMtribComNCM_MTX) {
+        botaoSalvarNCMtribComNCM_MTX.addEventListener("click", function () {
+            var dados = {}
+            var selecionados = document.getElementsByClassName("sel"); //pega os elementos da linha com a classe selecionado
+            var ncmMudar = document.getElementById("ncm");
+            var cestMudar = document.getElementById("cest"); //pegar o valor do input
+
+            var dados = {}; //variavel auxiliar para receber o ID
+            var strDados = "";
+            var ncm = ncmMudar.value;
+            var cest = cestMudar.value; // //variavel que recebe o valor do input
+
+            if (cest != "") {
+                if (cest == "NULL") {
+                    var resultado = confirm("Todos os NCM selecionados TERÃO O CEST APAGADOS, confirma?");
+                    if (resultado == false) {
+                        toastr.warning("Atribuição de CEST com valor Nulo para os produtos selecionados abortada");
+                        /* alert("Atribuição de NCM para os produtos selecionados abortada");*/
+                        document.getElementById("ncm").focus();
+                        return;
+                    }
+
+                } else {
+                    if (cest.length != 9) {
+                        /* alert("Tamanho do NCM incorreto! Digite novamente");*/
+                        document.getElementById("cest").focus();
+                        /* swal('Tamanho do NCM incorreto! Digite novamente"');*/
+                        toastr.error("Tamanho do CEST incorreto! Digite novamente");
+
+                    }
+                }
+
+
+
+            }
+
+
+
+            if (ncm != "") {
+                if (ncm.length != 10) {
+                    /* alert("Tamanho do NCM incorreto! Digite novamente");*/
+
+                    document.getElementById("ncm").focus();
+                    /* swal('Tamanho do NCM incorreto! Digite novamente"');*/
+                    toastr.error("Tamanho do NCM incorreto! Digite novamente");
+
+                } else {
+                    /*Laço para varrer os elementos com a tag TD*/
+                    for (var i = 0; i < selecionados.length; i++) {
+                        var selecionado = selecionados[i]; //variavel para conter os itens selecionados
+                        selecionado = selecionado.getElementsByTagName("td"); //atribui o item com a tag td
+                        dados[i] = selecionado[0].innerHTML;//atribui o valor presente no indice 0 à variavel dados
+                        dados[i] = dados[i].trim();
+                        strDados += dados[i] + ",";
+                    }
+
+                    bloqueioTela();//bloqueia tela
+
+                    //agora o ajax
+                    $.ajax({
+
+                        data: { strDados: strDados, ncm: ncm, cest: cest },
+                        types: "GET",
+                        processData: true,
+                        success: function () {
+
+                            window.location.href = '/TributacaoMTX/TributacaoNcmEditMassaModalEditMassaModalComNCMPost?strDados=' + strDados + '&ncm=' + ncm + '&cest=' + cest;
+
+                        }
+
+
+                    });
+
+
+                }
+
+
+            } else {
+                var resultado = confirm("O NCM informado foi NULO, deseja continuar ?");
+                if (resultado == true) {
+                    /*Laço para varrer os elementos com a tag TD*/
+                    for (var i = 0; i < selecionados.length; i++) {
+                        var selecionado = selecionados[i]; //variavel para conter os itens selecionados
+                        selecionado = selecionado.getElementsByTagName("td"); //atribui o item com a tag td
+                        dados[i] = selecionado[0].innerHTML;//atribui o valor presente no indice 0 à variavel dados
+                        dados[i] = dados[i].trim();
+                        strDados += dados[i] + ",";
+                    }
+
+                    bloqueioTela();//bloqueia tela
+
+                    //agora o ajax
+                    $.ajax({
+
+                        data: { strDados: strDados, ncm: ncm, cest: cest },
+                        types: "GET",
+                        processData: true,
+                        success: function () {
+                            window.location.href = '/Tributacao/TributacaoNcmEditMassaModalEditMassaModalComNCMPost?strDados=' + strDados + '&ncm=' + ncm + '&cest=' + cest;
+                            //window.location.href = '/Produto/EditMassaModalPost?strDados=' + strDados + '&ncm=' + ncm + '&cest=' + cest;
+
+                        }
+
+                    });
+
+
+                } else {
+                    toastr.warning("Atribuição de NCM para os produtos selecionados abortada");
+                    /* alert("Atribuição de NCM para os produtos selecionados abortada");*/
+                    document.getElementById("ncm").focus();
+                }
+
+            }
+
+
+
+
+
+
+        });
+    }
 
 });
 

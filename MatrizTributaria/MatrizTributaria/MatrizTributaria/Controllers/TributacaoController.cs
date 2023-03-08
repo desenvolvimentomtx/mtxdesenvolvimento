@@ -1684,6 +1684,8 @@ namespace MatrizTributaria.Controllers
                     }
                     catch (Exception e)
                     {
+
+                       
                         string ex = e.ToString();
                         regNSalvos++;
                     }

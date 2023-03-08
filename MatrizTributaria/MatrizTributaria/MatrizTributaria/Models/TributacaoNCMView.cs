@@ -215,6 +215,12 @@ namespace MatrizTributaria.Models
         [Column("SIMP_NACIONAL")]
         public sbyte? SIMP_NACIONAL { get; set; }
 
+        [Column("CRT")]
+        public int? CRT { get; set; }
+
+        [Column("REGIME_TRIBUTARIO")]
+        public int? REGIME_TRIBUTARIO { get; set; }
+
         [Column("AUDITADONCM")]
         public sbyte? AUDITADONCM { get; set; }
 
